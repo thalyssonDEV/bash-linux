@@ -13,7 +13,7 @@ Este projeto implementa um terminal Linux básico em Python, com funcionalidades
 
 ## Funcionalidades
 
-- **Execução de Comandos**: O terminal permite que o usuário execute comandos do sistema, como `ls`, `pwd`, `cd`, `rm`, entre outros.
+- **Execução de Comandos**: O terminal permite que o usuário execute comandos do sistema, como `ls`, `mv`, `echo`, `touch`, `rm`, entre outros.
 - **Manipulação de Processos**: É possível iniciar e controlar processos do sistema a partir do terminal Python.
 - **Suporte a Comandos Simples**: Implementação de alguns comandos básicos e a simulação de seus comportamentos.
 - **Interatividade**: O terminal recebe entrada do usuário e exibe a saída de maneira similar ao terminal Bash.
