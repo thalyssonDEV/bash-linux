@@ -25,4 +25,6 @@ This project implements a basic Linux terminal in Python, with functionalities s
 - Python installed on your system.
 - No external dependencies are required, aside from Python's standard libraries.
 
-![Bash Example](ba.png)
+##  Image:
+
+![Bash Example](bash.png)
