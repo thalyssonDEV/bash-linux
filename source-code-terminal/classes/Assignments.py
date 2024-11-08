@@ -29,3 +29,6 @@ class Assignments:
 
     elif command[0] == 'top' and len(command) == 1:
       return 7
+
+    elif (command[0] == 'yt-dlp' and len(command) == 3) and (command[1] == 'mp3' or command[1] == 'mp4'):
+      return 8
