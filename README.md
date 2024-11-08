@@ -10,6 +10,7 @@ This project implements a basic Linux terminal in Python, with additional featur
   - `os`: For interaction with the operating system (executing commands, handling files, and processes).
   - `subprocess`: To execute system commands and retrieve their results.
   - `sys`: For handling paths and command-line arguments, as well as controlling the terminal output.
+  - `threading`: For concurrent execution of tasks and process management in a multi-threaded environment.
 
 ## Features
 
