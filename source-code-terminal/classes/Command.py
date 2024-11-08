@@ -2,7 +2,7 @@ import os
 import sys
 import psutil
 import time
-import curses
+import subprocess
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
 
@@ -80,6 +80,7 @@ class Command:
     except FileNotFoundError:
       stdout.error(f"mv: cannot rename '{command[1]}': No such file or directory")
 
+
   def top(self) -> None:
     print(' Monitoring System '.center(50, '-'))
     print(f'Uptime: {psutil.boot_time()}')
@@ -107,3 +108,20 @@ class Command:
               pass
       
     print("-" * 50)
+
+
+  def yt_dlp(self) -> None:
+    try:
+      import yt_dlp
+
+    except ImportError:
+      stdout.error('yt-dlp library not found. Trying to install automatically...')
+      time.sleep(1)
+
+      try:
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--user', 'yt-dlp'])
+        import yt_dlp
+        
+      except subprocess.CalledProcessError:
+        stdout.error('error when trying to install yt-dlp. You may need administrator permissions')
+        stdout.error("try installing the package manually with the command 'pip install yt-dlp'")

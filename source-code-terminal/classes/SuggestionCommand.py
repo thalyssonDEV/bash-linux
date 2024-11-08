@@ -19,7 +19,8 @@ class SuggestionCommand:
             'echo',
             'mv',
             'help',
-            'top'
+            'top',
+            'yt-dlp'
         }
 
     def suggest_command(self, command: str) -> None:

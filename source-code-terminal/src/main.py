@@ -55,6 +55,9 @@ def main() -> None:
           top_thread = threading.Thread(target=update_top, args=(terminal,), daemon=True)
           top_thread.start()
 
+        case 8:
+          terminal.yt_dlp()
+
         case 0:
           terminal.exit()
 
