@@ -24,7 +24,7 @@ This project implements a basic Linux terminal in Python, with additional featur
 ### Requirements
 
 - Python installed on your system.
-- No external dependencies are required, aside from Python's standard libraries.
+- External dependencies will be installed automatically. If an error occurs, they can be installed manually using the commands of the terminal itself
 
 ##  Image:
 
