@@ -1,7 +1,7 @@
 # Linux Terminal with Python
 
 **Description**  
-This project implements a basic Linux terminal in Python, with functionalities similar to **Bash**. The goal is to emulate a command-line shell, allowing the execution of system commands and interaction with the operating system.
+This project implements a basic Linux terminal in Python, with additional features and similars to Bash. The goal is to emulate a command-line shell, allowing the execution of system commands and interaction with the operating system.
 
 ## Technologies Used
 
@@ -10,6 +10,7 @@ This project implements a basic Linux terminal in Python, with functionalities s
   - `os`: For interaction with the operating system (executing commands, handling files, and processes).
   - `subprocess`: To execute system commands and retrieve their results.
   - `sys`: For handling paths and command-line arguments, as well as controlling the terminal output.
+  - `threading`: For concurrent execution of tasks and process management in a multi-threaded environment.
 
 ## Features
 

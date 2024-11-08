@@ -1,6 +1,7 @@
 import platform
 import sys
 import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'classes')))
 
 from TerminalMessage import TerminalMessage
@@ -17,7 +18,8 @@ class SuggestionCommand:
             'clear',
             'echo',
             'mv',
-            'help'
+            'help',
+            'top'
         }
 
     def suggest_command(self, command: str) -> None:
