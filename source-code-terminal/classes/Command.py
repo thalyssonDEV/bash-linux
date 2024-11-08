@@ -1,5 +1,9 @@
 import os
 import sys
+import psutil
+import time
+import curses
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
 
 from TerminalMessage import TerminalMessage
@@ -75,3 +79,31 @@ class Command:
 
     except FileNotFoundError:
       stdout.error(f"mv: cannot rename '{command[1]}': No such file or directory")
+
+  def top(self) -> None:
+    print(' Monitoring System '.center(50, '-'))
+    print(f'Uptime: {psutil.boot_time()}')
+
+    cpu_percent = psutil.cpu_percent(interval=0.1)
+    print(f"CPU usage: {cpu_percent}%")
+
+    memory = psutil.virtual_memory()
+    print(f"Total Memory: {memory.total / (1024 ** 3):.2f} GB")
+    print(f"Used Memory: {memory.used / (1024 ** 3):.2f} GB")
+    print(f"Free Memory: {memory.available / (1024 ** 3):.2f} GB")
+    print(f"Memory Usage Percentage: {memory.percent}%")
+
+    print("-" * 50)
+    print("PID\tUser\t%CPU\t%MEM\tTime\tCommand")
+    print("-" * 50)
+
+    for proc in psutil.process_iter(['pid', 'username', 'cpu_percent', 'memory_percent', 'create_time', 'name']):
+          try:
+              print(f"{proc.info['pid']}\t{proc.info['username']}\t"
+                      f"{proc.info['cpu_percent']:.1f}\t{proc.info['memory_percent']:.1f}\t"
+                      f"{time.strftime('%H:%M:%S', time.gmtime(proc.info['create_time']))}\t"
+                      f"{proc.info['name']}")
+          except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+              pass
+      
+    print("-" * 50)

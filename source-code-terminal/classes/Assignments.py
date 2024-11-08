@@ -26,3 +26,6 @@ class Assignments:
     
     elif command[0] == 'help' and len(command) == 1:
       return 6
+
+    elif command[0] == 'top' and len(command) == 1:
+      return 7

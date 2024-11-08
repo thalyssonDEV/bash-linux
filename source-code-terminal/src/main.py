@@ -1,6 +1,7 @@
 import sys
 import os
 import readline
+import threading
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'classes')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'docs')))
@@ -10,6 +11,9 @@ from Assignments import Assignments
 from Command import Command
 from TerminalMessage import TerminalMessage
 from SuggestionCommand import SuggestionCommand
+
+def update_top(terminal: Command) -> None:
+  terminal.top()
 
 def main() -> None:
   os.system('clear')
@@ -46,6 +50,10 @@ def main() -> None:
         
         case 6:
           Documentation.show_help()
+
+        case 7:
+          top_thread = threading.Thread(target=update_top, args=(terminal,), daemon=True)
+          top_thread.start()
 
         case 0:
           terminal.exit()

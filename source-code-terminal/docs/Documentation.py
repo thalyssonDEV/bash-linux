@@ -33,12 +33,15 @@ class Documentation:
             rm file.txt
 
 {BOLD}{LIGHT_BLUE}mv{RESET} {BOLD}<filename> <new_name>{RESET}
-        {BOLD}{LIGHT_YELLOW}Renames or moves the specified file to the new name{RESET}
+        {BOLD}{LIGHT_YELLOW}Moves or renames the specified file to the new name{RESET}
         {BOLD}{LIGHT_GREEN}Example:{RESET}
             mv file.txt new_name.txt
 
 {BOLD}{LIGHT_BLUE}exit{RESET}
         {BOLD}{LIGHT_YELLOW}Exits the terminal{RESET}
+
+{BOLD}{LIGHT_BLUE}top{RESET}
+        {BOLD}{LIGHT_YELLOW}Displays a dynamic list of processes running on the system, with information about CPU usage, memory, and other resources{RESET}
 
 {BOLD}{LIGHT_BLUE}help{RESET}
         {BOLD}{LIGHT_YELLOW}Displays this help message{RESET}
