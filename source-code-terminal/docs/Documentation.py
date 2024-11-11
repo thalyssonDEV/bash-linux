@@ -45,4 +45,18 @@ class Documentation:
 
 {BOLD}{LIGHT_BLUE}help{RESET}
         {BOLD}{LIGHT_YELLOW}Displays this help message{RESET}
+        
+{BOLD}{LIGHT_BLUE}yt-dlp mp4{RESET} {BOLD}<video_url>{RESET}
+        {BOLD}{LIGHT_YELLOW}Downloads the video from the provided URL in MP4 format{RESET}
+        {BOLD}{LIGHT_GREEN}Example:{RESET}
+            yt-dlp mp4 https://www.youtube.com/watch?v=example_video
+
+{BOLD}{LIGHT_BLUE}yt-dlp mp3{RESET} {BOLD}<video_url>{RESET}
+        {BOLD}{LIGHT_YELLOW}Downloads the video from the provided URL in MP3 format{RESET}
+        {BOLD}{LIGHT_GREEN}Example:{RESET}
+            yt-dlp mp4 https://www.youtube.com/watch?v=example_video
+        
+        
+        
+        
 """)

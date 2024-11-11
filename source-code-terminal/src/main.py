@@ -29,7 +29,6 @@ def main() -> None:
 
       readline.add_history(attempt_command)
 
-
       code_terminal_command = Assignments.check_command(attempt_command)
     
       match code_terminal_command:
@@ -56,7 +55,7 @@ def main() -> None:
           top_thread.start()
 
         case 8:
-          terminal.yt_dlp()
+          terminal.yt_dlp(attempt_command)
 
         case 0:
           terminal.exit()
