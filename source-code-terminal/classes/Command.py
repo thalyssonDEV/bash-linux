@@ -1,7 +1,7 @@
 import os
 import sys
-import psutil
 import time
+import psutil
 import subprocess
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
@@ -110,18 +110,50 @@ class Command:
     print("-" * 50)
 
 
-  def yt_dlp(self) -> None:
+  def yt_dlp(self, attempt_command) -> None:
+    command = attempt_command.strip().split()
+    video_url = command[2]
+    
     try:
       import yt_dlp
 
     except ImportError:
       stdout.error('yt-dlp library not found. Trying to install automatically...')
-      time.sleep(1)
-
+      
       try:
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--user', 'yt-dlp'])
         import yt_dlp
         
       except subprocess.CalledProcessError:
-        stdout.error('error when trying to install yt-dlp. You may need administrator permissions')
-        stdout.error("try installing the package manually with the command 'pip install yt-dlp'")
+        stdout.error("Permission error: try to install the package manually with the command 'pip install yt-dlp'")
+        
+    if command[1] == 'mp4':
+      sys.stderr = open(os.devnull, 'w')
+      
+      ydl_opts = {
+        'format': 'best',
+        'outtmpl': '%(title)s.%(ext)s',
+        'quiet': True
+      }
+      
+      try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+          ydl.download([video_url])
+          stdout.success('Download successful!')
+          
+      except Exception as e:
+        stdout.error('Download failed: URL not found.')
+    
+    # else:
+    #   ydl_opts = {
+    #     'format': 'bestaudio/best',
+    #     'outtmpl': '%(title)s.%(ext)s',
+    #     'postprocessors': [{
+    #         'key': 'FFmpegAudio',
+    #         'preferredcodec': 'mp3',
+    #         'preferredquality': '192',
+    #     }],
+    #   }
+    
+    #   with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    #     ydl.download([video_url])
