@@ -11,6 +11,7 @@ from Assignments import Assignments
 from Command import Command
 from TerminalMessage import TerminalMessage
 from SuggestionCommand import SuggestionCommand
+from Dependencies import Dependencies
 
 def update_top(terminal: Command) -> None:
   terminal.top()
@@ -20,6 +21,7 @@ def main() -> None:
   stdout = TerminalMessage() # Instância da classe TerminalMessage
   terminal = Command() # Intância da classe Command
   suggest = SuggestionCommand() # Instância da classe SuggestCommand
+  terminal_dependencies = Dependencies() # Instãncia da classe Dependencies
   
   while True:
     try:
@@ -32,33 +34,43 @@ def main() -> None:
       code_terminal_command = Assignments.check_command(attempt_command)
     
       match code_terminal_command:
-        case 1:
+
+        case 'touch':
           terminal.touch(attempt_command)
           
-        case 2:
+        case 'clear':
           terminal.clear()
 
-        case 3:
+        case 'echo':
           terminal.echo(attempt_command)
 
-        case 4:
+        case 'rm':
           terminal.rm(attempt_command)
 
-        case 5:
+        case 'mv':
           terminal.mv(attempt_command)
         
-        case 6:
+        case 'help':
           Documentation.show_help()
 
-        case 7:
+        case 'top':
           top_thread = threading.Thread(target=update_top, args=(terminal,), daemon=True)
           top_thread.start()
 
-        case 8:
+        case 'yt-dlp':
           terminal.yt_dlp(attempt_command)
 
-        case 0:
+        case 'exit':
           terminal.exit()
+
+        case 'weather':
+          terminal.weather(attempt_command)
+
+        case 1:
+          terminal_dependencies.pip_install_yt_dlp()
+        case -1:
+          terminal_dependencies.pip_uninstall_yt_dlp()
+       
 
         case _:
           command = attempt_command.strip().split()
