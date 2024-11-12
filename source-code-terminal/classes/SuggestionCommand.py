@@ -20,7 +20,8 @@ class SuggestionCommand:
             'mv',
             'help',
             'top',
-            'yt-dlp'
+            'pip install yt-dlp',
+            'pip uninstall yt-dlp'
         }
 
     def suggest_command(self, command: str) -> None:

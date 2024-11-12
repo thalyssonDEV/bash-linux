@@ -3,6 +3,7 @@ import sys
 import time
 import psutil
 import subprocess
+import requests
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'utils')))
 
@@ -113,19 +114,13 @@ class Command:
   def yt_dlp(self, attempt_command) -> None:
     command = attempt_command.strip().split()
     video_url = command[2]
-    
+      
     try:
       import yt_dlp
 
     except ImportError:
-      stdout.error('yt-dlp library not found. Trying to install automatically...')
-      
-      try:
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--user', 'yt-dlp'])
-        import yt_dlp
-        
-      except subprocess.CalledProcessError:
-        stdout.error("Permission error: try to install the package manually with the command 'pip install yt-dlp'")
+      stdout.error("yt-dlp library not found: install the package with the command 'pip install yt-dlp'")
+      return 1
         
     if command[1] == 'mp4':
       sys.stderr = open(os.devnull, 'w')
@@ -139,21 +134,53 @@ class Command:
       try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
           ydl.download([video_url])
-          stdout.success('Download successful!')
+          stdout.success(f'Download Successful!')
           
       except Exception as e:
-        stdout.error('Download failed: URL not found.')
-    
-    # else:
-    #   ydl_opts = {
-    #     'format': 'bestaudio/best',
-    #     'outtmpl': '%(title)s.%(ext)s',
-    #     'postprocessors': [{
-    #         'key': 'FFmpegAudio',
-    #         'preferredcodec': 'mp3',
-    #         'preferredquality': '192',
-    #     }],
-    #   }
-    
-    #   with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    #     ydl.download([video_url])
+        stdout.error('Download Failed: URL not found.')
+
+    # elif command[1] == 'mp3':
+    #     sys.stderr = open(os.devnull, 'w')
+        
+    #     ydl_opts = {
+    #         'format': 'bestaudio/best',
+    #         'outtmpl': '%(title)s.%(ext)s',
+    #         'postprocessors': [{
+    #             'key': 'FFmpegAudio',
+    #             'preferredcodec': 'mp3',
+    #             'preferredquality': '192',
+    #         }],
+    #         'quiet': True
+    #     }
+        
+    #     try:
+    #         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+    #             ydl.download([video_url])
+    #             stdout.success(f'Download Successful! Audio saved as MP3.')
+    #     except Exception as e:
+    #       stdout.error(f'Download Failed: {str(e)}')
+
+  def weather(self, attempt_command) -> None:
+    command = attempt_command.strip().split()
+    city = command[1]
+
+    API_KEY = 'c9a21fc9b47eacdd32144b51149a37ba'
+    base_url = "http://api.openweathermap.org/data/2.5/weather"
+
+    url = f"{base_url}?q={city}&appid={API_KEY}&units=metric"
+    response = requests.get(url)
+
+    if response.status_code == 200:
+      data = response.json()
+
+      city_name = data['name']
+      temperature = data['main']['temp']
+      humidity = data['main']['humidity']
+      description = data['weather'][0]['description']
+      wind_speed = data['wind']['speed']
+
+      print(f"Clima em {city_name}:")
+      print(f"Temperatura: {temperature}°C")
+      print(f"Umidade: {humidity}%")
+      print(f"Descrição: {description}")
+      print(f"Velocidade do vento: {wind_speed * 3.6} Km/h")
