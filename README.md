@@ -1,4 +1,4 @@
-# Linux Terminal with Python
+# Linux Terminal with Python 💻
 
 **Description**  
 This project implements a basic Linux terminal in Python, with additional features and similars to Bash. The goal is to emulate a command-line shell, allowing the execution of system commands and interaction with the operating system.
